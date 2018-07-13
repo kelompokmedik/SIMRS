@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2018 at 07:13 AM
+-- Generation Time: Jul 02, 2018 at 08:56 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -30,6 +30,7 @@ CREATE TABLE `tb_akun` (
   `id_akun` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `hak_akses` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,9 +39,11 @@ CREATE TABLE `tb_akun` (
 -- Dumping data for table `tb_akun`
 --
 
-INSERT INTO `tb_akun` (`id_akun`, `username`, `password`, `created`, `modified`) VALUES
-(1, 'andy', '123', '2018-05-01 00:00:00', '2018-05-01 00:00:00'),
-(2, 'andy', 'asri', '2018-05-02 00:00:00', '2018-05-02 00:00:00');
+INSERT INTO `tb_akun` (`id_akun`, `username`, `password`, `hak_akses`, `created`, `modified`) VALUES
+(3, 'arinil', '321', 'dokter', '2018-06-05 05:57:01', '2018-06-05 06:05:17'),
+(4, 'andy', '123', 'admin', '2018-06-05 00:00:00', '2018-06-05 00:00:00'),
+(5, 'anfel', '1234', 'front office', '2018-06-04 00:00:00', '2018-06-04 00:00:00'),
+(6, 'fitri', '321', 'keuangan', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -125,6 +128,102 @@ INSERT INTO `tb_jenjang` (`id_jenjang`, `jenjang`, `created`, `modified`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_kategori`
+--
+
+CREATE TABLE `tb_kategori` (
+  `id_kategori` int(11) NOT NULL,
+  `kd_kategori` varchar(100) NOT NULL,
+  `nm_kategori` varchar(100) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_kategori`
+--
+
+INSERT INTO `tb_kategori` (`id_kategori`, `kd_kategori`, `nm_kategori`, `deskripsi`, `created`, `modified`) VALUES
+(2, 'KT', 'kursi Tunggu', '', '2018-06-05 09:47:40', '2018-06-05 09:47:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_merk`
+--
+
+CREATE TABLE `tb_merk` (
+  `id_merk` int(11) NOT NULL,
+  `kd_merk` varchar(100) NOT NULL,
+  `nm_merk` varchar(100) NOT NULL,
+  `catatan` text NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_merk`
+--
+
+INSERT INTO `tb_merk` (`id_merk`, `kd_merk`, `nm_merk`, `catatan`, `created`, `modified`) VALUES
+(2, 'bcbg', 'gdbdg', 'dgsg', '2018-06-06 05:59:37', '2018-06-06 05:59:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pegawai`
+--
+
+CREATE TABLE `tb_pegawai` (
+  `id_pegawai` int(11) NOT NULL,
+  `nm_pegawai` varchar(50) NOT NULL,
+  `no_ktp` int(100) NOT NULL,
+  `pangkat` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `alamat` text NOT NULL,
+  `telp` int(50) NOT NULL,
+  `tmpt_lahir` varchar(100) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `agama` varchar(100) NOT NULL,
+  `pddkn_terakhir` varchar(100) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pegawai`
+--
+
+INSERT INTO `tb_pegawai` (`id_pegawai`, `nm_pegawai`, `no_ktp`, `pangkat`, `jabatan`, `alamat`, `telp`, `tmpt_lahir`, `tgl_lahir`, `agama`, `pddkn_terakhir`, `created`, `modified`) VALUES
+(2, 'hsghsgh', 987654, '', '', '', 0, '', '0000-00-00', '', '', '2018-06-05 08:32:10', '2018-06-05 08:32:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pensiun`
+--
+
+CREATE TABLE `tb_pensiun` (
+  `id_pensiun` int(11) NOT NULL,
+  `nm_pegawai` varchar(50) NOT NULL,
+  `tgl_pensiun` date NOT NULL,
+  `catatan` text NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pensiun`
+--
+
+INSERT INTO `tb_pensiun` (`id_pensiun`, `nm_pegawai`, `tgl_pensiun`, `catatan`, `created`, `modified`) VALUES
+(1, 'hsghsgh', '2018-06-10', '', '2018-06-05 08:40:34', '2018-06-05 08:40:34'),
+(2, '', '0000-00-00', 'ghsghgha', '2018-06-05 08:55:18', '2018-06-05 08:55:18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_poli`
 --
 
@@ -160,7 +259,7 @@ CREATE TABLE `tb_rawat` (
 --
 
 INSERT INTO `tb_rawat` (`id_rawat`, `rawat`, `created`, `modified`) VALUES
-(2, 'merpati', '2018-05-30 04:01:30', '2018-05-30 04:01:30');
+(2, 'melati', '2018-05-30 04:01:30', '2018-05-30 08:21:23');
 
 -- --------------------------------------------------------
 
@@ -212,7 +311,8 @@ CREATE TABLE `tb_spesialis` (
 --
 
 INSERT INTO `tb_spesialis` (`id_spesialis`, `spesialis`, `created`, `modified`) VALUES
-(2, 'penyakit dalam', '2018-05-30 03:32:01', '2018-05-30 03:32:12');
+(2, 'kulit', '2018-05-30 03:32:01', '2018-05-30 08:20:25'),
+(3, 'jantung', '2018-05-30 08:20:55', '2018-05-30 08:20:55');
 
 --
 -- Indexes for dumped tables
@@ -249,6 +349,30 @@ ALTER TABLE `tb_jenjang`
   ADD PRIMARY KEY (`id_jenjang`);
 
 --
+-- Indexes for table `tb_kategori`
+--
+ALTER TABLE `tb_kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `tb_merk`
+--
+ALTER TABLE `tb_merk`
+  ADD PRIMARY KEY (`id_merk`);
+
+--
+-- Indexes for table `tb_pegawai`
+--
+ALTER TABLE `tb_pegawai`
+  ADD PRIMARY KEY (`id_pegawai`);
+
+--
+-- Indexes for table `tb_pensiun`
+--
+ALTER TABLE `tb_pensiun`
+  ADD PRIMARY KEY (`id_pensiun`);
+
+--
 -- Indexes for table `tb_poli`
 --
 ALTER TABLE `tb_poli`
@@ -280,7 +404,7 @@ ALTER TABLE `tb_spesialis`
 -- AUTO_INCREMENT for table `tb_akun`
 --
 ALTER TABLE `tb_akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_departement`
 --
@@ -302,6 +426,26 @@ ALTER TABLE `tb_jabatan`
 ALTER TABLE `tb_jenjang`
   MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `tb_kategori`
+--
+ALTER TABLE `tb_kategori`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_merk`
+--
+ALTER TABLE `tb_merk`
+  MODIFY `id_merk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_pegawai`
+--
+ALTER TABLE `tb_pegawai`
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_pensiun`
+--
+ALTER TABLE `tb_pensiun`
+  MODIFY `id_pensiun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tb_poli`
 --
 ALTER TABLE `tb_poli`
@@ -320,7 +464,7 @@ ALTER TABLE `tb_regpasien`
 -- AUTO_INCREMENT for table `tb_spesialis`
 --
 ALTER TABLE `tb_spesialis`
-  MODIFY `id_spesialis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_spesialis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
